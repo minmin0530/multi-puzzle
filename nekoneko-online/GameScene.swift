@@ -14,10 +14,11 @@ class GameScene: SKScene {
 //    private var label : SKLabelNode?
 //    private var spinnyNode : SKShapeNode?
     var snArray: [Neko] = [] //= Neko(texture: SKTexture(imageNamed: "nekoneko-orange"))
+    let scale: CGFloat = 0.5
 
     override func didMove(to view: SKView) {
         
-        for _ in 0...10 {
+        for _ in 0...30 {
             let r = Int.random(in: 0...9)
             if r % 3 == 0 {
                 snArray.append(Neko(texture: SKTexture(imageNamed: "nekoneko-pink")))
@@ -31,7 +32,28 @@ class GameScene: SKScene {
         }
         
         var z: CGFloat = 1.0
+        
+        let backroundImage = SKSpriteNode(texture: SKTexture(imageNamed: "major"))
+        backroundImage.zPosition = z
+        backroundImage.xScale = 0.6
+        backroundImage.yScale = 0.6
+        
+        z += 1
+        addChild(backroundImage)
+        
         for sn in snArray {
+            sn.xScale = scale
+            sn.yScale = scale
+            sn.eyeFrameRight.xScale = scale
+            sn.eyeFrameLeft.xScale = scale
+            sn.eyeRight.xScale = scale
+            sn.eyeLeft.xScale = scale
+            sn.eyeFrameRight.yScale = scale
+            sn.eyeFrameLeft.yScale = scale
+            sn.eyeRight.yScale = scale
+            sn.eyeLeft.yScale = scale
+
+            
             sn.time = CGFloat.random(in: 0.0...360.0)
             sn.timeSpeed = CGFloat.random(in: 0.0...0.05)
             sn.position.x = CGFloat.random(in: -400.0...400.0)
@@ -39,26 +61,26 @@ class GameScene: SKScene {
             sn.eyeRight.fillColor = UIColor.white
             sn.eyeRight.strokeColor = UIColor.black
             sn.eyeRight.lineWidth = 10
-            sn.eyeRight.position.x = 50
-            sn.eyeRight.position.y = -20
+            sn.eyeRight.position.x = 50 * scale
+            sn.eyeRight.position.y = -20 * scale
 
             sn.eyeLeft.fillColor = UIColor.white
             sn.eyeLeft.strokeColor = UIColor.black
             sn.eyeLeft.lineWidth = 10
-            sn.eyeLeft.position.x = -50
-            sn.eyeLeft.position.y = -20
+            sn.eyeLeft.position.x = -50 * scale
+            sn.eyeLeft.position.y = -20 * scale
 
             sn.eyeFrameRight.fillColor = UIColor.white
             sn.eyeFrameRight.strokeColor = UIColor.black
             sn.eyeFrameRight.lineWidth = 10
-            sn.eyeFrameRight.position.x = 50
-            sn.eyeFrameRight.position.y = -30
+            sn.eyeFrameRight.position.x = 50 * scale
+            sn.eyeFrameRight.position.y = -30 * scale
 
             sn.eyeFrameLeft.fillColor = UIColor.white
             sn.eyeFrameLeft.strokeColor = UIColor.black
             sn.eyeFrameLeft.lineWidth = 10
-            sn.eyeFrameLeft.position.x = -50
-            sn.eyeFrameLeft.position.y = -30
+            sn.eyeFrameLeft.position.x = -50 * scale
+            sn.eyeFrameLeft.position.y = -30 * scale
 
             sn.zPosition = z
             z += 1
@@ -130,14 +152,14 @@ class GameScene: SKScene {
             sn.time += sn.timeSpeed
             
             sn.position.y += 5 * cos(sn.time)
-            sn.eyeFrameRight.position.x = sn.position.x + 50.0
-            sn.eyeFrameRight.position.y = sn.position.y - 30.0
-            sn.eyeFrameLeft.position.x = sn.position.x - 50.0
-            sn.eyeFrameLeft.position.y = sn.position.y - 30.0
-            sn.eyeRight.position.x = 30.0 * cos(sn.time) + 50.0 + sn.position.x
-            sn.eyeRight.position.y = 30.0 * sin(sn.time) - 30.0 + sn.position.y
-            sn.eyeLeft.position.x = 30.0 * cos(sn.time) - 50.0 + sn.position.x
-            sn.eyeLeft.position.y = 30.0 * sin(sn.time) - 30.0 + sn.position.y
+            sn.eyeFrameRight.position.x = sn.position.x + 50.0 * scale
+            sn.eyeFrameRight.position.y = sn.position.y - 30.0 * scale
+            sn.eyeFrameLeft.position.x = sn.position.x - 50.0 * scale
+            sn.eyeFrameLeft.position.y = sn.position.y - 30.0 * scale
+            sn.eyeRight.position.x = 30.0 * scale * cos(sn.time) + 50.0 * scale + sn.position.x
+            sn.eyeRight.position.y = 30.0 * scale * sin(sn.time) - 30.0 * scale + sn.position.y
+            sn.eyeLeft.position.x = 30.0 * scale * cos(sn.time) - 50.0 * scale + sn.position.x
+            sn.eyeLeft.position.y = 30.0 * scale * sin(sn.time) - 30.0 * scale + sn.position.y
         }
     }
 }
