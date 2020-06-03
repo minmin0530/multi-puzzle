@@ -14,11 +14,11 @@ class GameScene: SKScene {
 //    private var label : SKLabelNode?
 //    private var spinnyNode : SKShapeNode?
     var snArray: [Neko] = [] //= Neko(texture: SKTexture(imageNamed: "nekoneko-orange"))
-    let scale: CGFloat = 0.5
+    let scale: CGFloat = 0.6
 
     override func didMove(to view: SKView) {
         
-        for _ in 0...30 {
+        for _ in 0...22 {
             let r = Int.random(in: 0...9)
             if r % 3 == 0 {
                 snArray.append(Neko(texture: SKTexture(imageNamed: "nekoneko-pink")))
@@ -41,6 +41,8 @@ class GameScene: SKScene {
         z += 1
         addChild(backroundImage)
         
+        var x: CGFloat = -300.0
+        var y: CGFloat = -500.0
         for sn in snArray {
             sn.xScale = scale
             sn.yScale = scale
@@ -56,8 +58,15 @@ class GameScene: SKScene {
             
             sn.time = CGFloat.random(in: 0.0...360.0)
             sn.timeSpeed = CGFloat.random(in: 0.0...0.05)
-            sn.position.x = CGFloat.random(in: -400.0...400.0)
-            sn.position.y = CGFloat.random(in: -400.0...400.0)
+            sn.position.x = x//CGFloat.random(in: -400.0...400.0)
+            sn.position.y = y//CGFloat.random(in: -400.0...400.0)
+            
+            x += 150
+            if x >= 450.0 {
+                x = -450.0
+                y += 150.0
+            }
+            
             sn.eyeRight.fillColor = UIColor.white
             sn.eyeRight.strokeColor = UIColor.black
             sn.eyeRight.lineWidth = 10
@@ -149,9 +158,9 @@ class GameScene: SKScene {
         // Called before each frame is rendered
         for sn in snArray {
 
-            sn.time += sn.timeSpeed
-            
-            sn.position.y += 5 * cos(sn.time)
+//            sn.time += sn.timeSpeed
+//
+//            sn.position.y += 5 * cos(sn.time)
             sn.eyeFrameRight.position.x = sn.position.x + 50.0 * scale
             sn.eyeFrameRight.position.y = sn.position.y - 30.0 * scale
             sn.eyeFrameLeft.position.x = sn.position.x - 50.0 * scale
