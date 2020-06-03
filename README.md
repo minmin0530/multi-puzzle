@@ -15,3 +15,4 @@
 サーバ：Node.js、もしくはDeno
 
 ## その他
+仮称：nekoneko-online
